@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Muzeul din Ghiduleni · Istorie și Etnografie</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#f5eedf; --parchment:#e8dcc0; --linen:#ece1c7;
+    --clay:#b84a2c; --clay-dark:#8e2f1c; --wine:#5b1a1f;
+    --ochre:#c9892f; --ochre-dark:#9a6418;
+    --forest:#2b4432; --forest-dark:#1a2c1f;
+    --bark:#3a2a1d; --ink:#1f1b16; --stone:#8a7f6b;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Cardo",Georgia,serif; color:var(--bark);
+    background:var(--parchment);
+    background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cg stroke='%233a2a1d' stroke-width='1' opacity='0.05'%3E%3Cline x1='4' y1='4' x2='22' y2='22'/%3E%3Cline x1='22' y1='4' x2='4' y2='22'/%3E%3C/g%3E%3C/svg%3E");
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+
+  .altita{height:24px; width:100%; display:block;}
+
+  /* nav (shared header) */
+  header.nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 7vw; border-bottom:1px solid rgba(58,42,29,.18);
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--parchment) 92%, transparent);
+    backdrop-filter:saturate(1.1) blur(6px);
+  }
+  .brand{line-height:1; flex-shrink:0;}
+  .brand b{font-size:21px; font-weight:700; letter-spacing:.01em; display:block; white-space:nowrap;}
+  .brand span{font-family:"Inter",sans-serif; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--stone); white-space:nowrap;}
+  .nav nav{display:flex; gap:26px;}
+  .nav nav a{font-family:"Inter",sans-serif; font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--bark); opacity:.8;}
+  .nav nav a.active{color:var(--clay-dark); opacity:1; border-bottom:2px solid var(--clay-dark); padding-bottom:3px;}
+  .nav nav a:hover{opacity:1;}
+
+  /* hero */
+  .hero{position:relative; min-height:min(88vh,720px); display:flex; align-items:flex-end; overflow:hidden;}
+  .hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 42%;}
+  .hero .scrim{position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,16,12,.2) 0%, rgba(20,16,12,.42) 50%, rgba(20,16,12,.84) 100%);}
+  .hero .inner{position:relative; width:100%; padding:0 7vw 56px;}
+  .hero .eyebrow{font-family:"Inter",sans-serif; font-size:12.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--ochre); margin-bottom:18px;}
+  .hero h1{font-size:clamp(34px,5.6vw,76px); line-height:1.08; font-weight:700; color:var(--ivory); max-width:none; text-shadow:0 2px 28px rgba(0,0,0,.4);}
+  .hero .sub{font-family:"Inter",sans-serif; font-size:16px; line-height:1.5; color:var(--parchment); margin-top:20px; max-width:54ch; opacity:.94;}
+  .hero .cta{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
+  .hero .cta a{font-family:"Inter",sans-serif; font-size:14px; font-weight:600; letter-spacing:.02em; padding:14px 26px; display:inline-flex; align-items:center; gap:9px;}
+  .hero .cta .primary{background:var(--clay); color:var(--ivory);}
+  .hero .cta .primary:hover{background:var(--clay-dark);}
+  .hero .cta .ghost{border:1.5px solid rgba(245,238,223,.6); color:var(--ivory);}
+  .hero .cta .ghost:hover{background:rgba(245,238,223,.12);}
+
+  /* intro lede */
+  .lede{max-width:860px; margin:78px auto 8px; padding:0 7vw;}
+  .lede p{font-size:clamp(20px,2.1vw,25px); line-height:1.62; color:var(--ink); text-wrap:pretty;}
+  .lede .drop::first-letter{font-size:5.2em; line-height:.72; float:left; margin:.05em .14em 0 0; color:var(--clay-dark); font-weight:700;}
+
+  /* story beats */
+  .beats{max-width:1180px; margin:0 auto; padding:64px 7vw 8px;}
+  .beats-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:38px;}
+  .beat figure{margin:0 0 18px; overflow:hidden; border:1px solid rgba(58,42,29,.16);}
+  .beat img{width:100%; height:240px; object-fit:cover; display:block;}
+  .beat .k{font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--clay-dark); margin-bottom:8px;}
+  .beat h3{font-size:27px; font-weight:700; line-height:1.1; margin-bottom:10px;}
+  .beat p{font-size:16px; line-height:1.6; text-wrap:pretty;}
+
+  /* collections row */
+  .collrow{margin-top:80px; background:var(--bark); color:var(--ivory);}
+  .collrow .inner{max-width:1180px; margin:0 auto; padding:64px 7vw;}
+  .collrow .head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:34px; gap:20px; flex-wrap:wrap;}
+  .collrow h2{font-size:clamp(30px,3.6vw,42px); font-weight:700; line-height:1;}
+  .collrow .head a{font-family:"Inter",sans-serif; font-size:13.5px; color:var(--ochre); letter-spacing:.06em; white-space:nowrap;}
+  .collrow .head a:hover{color:var(--ivory);}
+  .collrow .grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(245,238,223,.16); border:1px solid rgba(245,238,223,.16);}
+  .collrow .cell{background:var(--bark); padding:28px 24px; transition:background .2s;}
+  .collrow a.cell:hover{background:#46341f;}
+  .collrow .cell h3{font-size:23px; font-weight:700; margin-bottom:8px;}
+  .collrow .cell p{font-family:"Inter",sans-serif; font-size:13.5px; line-height:1.5; color:var(--parchment);}
+
+  /* events teaser */
+  .teaser{max-width:1180px; margin:0 auto; padding:74px 7vw 0; display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:center;}
+  .teaser figure{margin:0; overflow:hidden; border:1px solid rgba(58,42,29,.18);}
+  .teaser img{width:100%; height:340px; object-fit:cover;}
+  .teaser .k{font-family:"Inter",sans-serif; font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--clay-dark); margin-bottom:14px;}
+  .teaser h2{font-size:clamp(28px,3.2vw,38px); font-weight:700; line-height:1.1; margin-bottom:16px; text-wrap:balance;}
+  .teaser p{font-size:17px; line-height:1.65; margin-bottom:24px; text-wrap:pretty;}
+  .teaser a.link{font-family:"Inter",sans-serif; font-size:14px; font-weight:600; color:var(--clay-dark); border-bottom:1.5px solid var(--clay); padding-bottom:3px;}
+
+  /* person sections (memoria / fondator) */
+  .person{max-width:1180px; margin:78px auto 0; padding:0 7vw; display:grid; grid-template-columns:300px 1fr; gap:64px; align-items:center;}
+  .person.flip{grid-template-columns:1fr 360px;}
+  .founder-gallery{max-width:1180px; margin:30px auto 0; padding:0 7vw; display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .founder-gallery .pframe{max-width:none;}
+  .founder-gallery .pframe img{width:100%; height:340px; object-fit:cover; display:block; border:1px solid rgba(58,42,29,.25);}
+  .person.flip .ptext{order:1;} .person.flip .pmedia{order:2;}
+  .pmedia{display:flex; justify-content:center;}
+  .portrait{width:230px; aspect-ratio:1; position:relative; display:flex; align-items:center; justify-content:center;}
+  .portrait .ring{position:absolute; inset:0; border-radius:50%; border:1.5px dashed rgba(58,42,29,.38);}
+  .portrait.solid::before{content:""; position:absolute; inset:-24px; border-radius:50%; background:rgba(58,42,29,.06);}
+  .portrait svg{width:86px; height:86px; color:var(--clay); position:relative;}
+  .pframe{margin:0; width:100%; max-width:360px;}
+  .pframe img{width:100%; height:auto; display:block; border:1px solid rgba(58,42,29,.25);}
+  .pframe figcaption{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--stone); margin-top:10px; text-align:center;}
+  .portrait .cap{position:absolute; bottom:-2px; left:50%; transform:translateX(-50%); background:var(--parchment); padding:0 10px; font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--stone); letter-spacing:.08em; white-space:nowrap;}
+  .person .k{font-family:"Inter",sans-serif; font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--clay-dark); margin-bottom:14px;}
+  .person h2{font-size:clamp(30px,3.6vw,46px); font-weight:700; line-height:1.02; color:var(--ink); margin-bottom:6px;}
+  .person .yrs{font-family:"Cardo",serif; font-size:26px; font-weight:700; color:var(--clay); margin-bottom:18px;}
+  .person p{font-family:"Inter",sans-serif; font-size:16.5px; line-height:1.68; color:var(--bark); margin-bottom:18px; text-wrap:pretty;}
+  .person p:last-child{margin-bottom:0;}
+  .person p.q{font-style:italic; color:var(--ink);}
+  .person p em{font-style:italic;}
+
+  /* place / village section */
+  .place{max-width:1180px; margin:78px auto 0; padding:0 7vw; display:grid; grid-template-columns:1fr 1.25fr; gap:56px; align-items:center;}
+  .place .card{border:1px solid rgba(58,42,29,.2); border-radius:10px; background:rgba(255,255,255,.28); padding:52px 28px; text-align:center;}
+  .place .card svg{width:44px; height:44px; display:block; margin:0 auto 18px; color:var(--forest);}
+  .place .card .n{font-family:"Inter",sans-serif; font-weight:600; font-size:15px; color:var(--ink);}
+  .place .card .r{font-family:"Inter",sans-serif; font-size:14px; color:var(--bark); line-height:1.7; margin-top:4px;}
+  .place .k{font-family:"Inter",sans-serif; font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--clay-dark); margin-bottom:14px;}
+  .place h2{font-size:clamp(30px,3.6vw,44px); font-weight:700; line-height:1.05; color:var(--ink); margin-bottom:20px;}
+  .place p{font-size:18px; line-height:1.7; color:var(--ink); text-wrap:pretty;}
+  .place p .em{font-weight:700; color:var(--wine);}
+  .place a.more{display:inline-flex; align-items:center; gap:9px; margin-top:24px; font-family:"Inter",sans-serif; font-size:14px; font-weight:600; color:var(--forest); border-bottom:1.5px solid var(--forest); padding-bottom:3px;}
+  .place a.more:hover{color:var(--forest-dark);}
+
+  /* footer */
+  footer.visit{margin-top:84px; background:var(--bark); color:var(--ivory);}
+  footer .vwrap{max-width:1180px; margin:0 auto; padding:64px 7vw; display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:40px;}
+  footer h3{font-size:30px; font-weight:700; margin-bottom:6px;}
+  footer .tag{font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ochre);}
+  footer .lab{font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ochre); margin-bottom:12px;}
+  footer .row{font-family:"Inter",sans-serif; font-size:14.5px; color:var(--parchment); margin-bottom:6px; line-height:1.55;}
+  footer .credit{border-top:1px solid rgba(245,238,223,.15); padding:22px 7vw; font-family:"Inter",sans-serif; font-size:12.5px; color:var(--stone); text-align:center; letter-spacing:.04em;}
+
+  @media (max-width:820px){
+    .beats-grid{grid-template-columns:1fr; gap:28px;}
+    .collrow .grid{grid-template-columns:1fr 1fr;}
+    .teaser{grid-template-columns:1fr; gap:24px;}
+    .teaser img{height:260px;}
+    .place{grid-template-columns:1fr; gap:28px;}
+    .person, .person.flip{grid-template-columns:1fr; gap:32px;}
+    .person.flip .ptext{order:2;} .person.flip .pmedia{order:1;}
+    .founder-gallery{grid-template-columns:1fr; gap:16px;}
+    .founder-gallery img{height:300px;}
+    footer .vwrap{grid-template-columns:1fr; gap:28px;}
+    .nav nav{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<svg class="altita" viewBox="0 0 1280 40" preserveAspectRatio="none" aria-hidden="true">
+  <rect width="100%" height="100%" fill="var(--linen)"></rect>
+  <g stroke="#8e2f1c" fill="none" stroke-width="1.4"></g>
+</svg>
+
+<header class="nav">
+  <a href="index.html" class="brand"><b>Muzeul din Ghiduleni</b><span>Istorie și Etnografie</span></a>
+  <nav>
+    <a href="index.html" class="active">Acasă</a>
+    <a href="Povestea.html">Despre</a>
+    <a href="Colectii.html">Colecții</a>
+    <a href="Evenimente.html">Evenimente</a>
+    <a href="#vizita">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="assets/fatada.jpg" alt="Casa-conac Ion Croitoru, sediul muzeului din Ghiduleni">
+  <div class="scrim"></div>
+  <div class="inner">
+    <h1>Casa-conac care a devenit memoria satului</h1>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="lede">
+  <p class="drop">În satul Ghiduleni, pe valea Cogâlnicului, vechiul conac al familiei Croitoru a stat multă vreme tăcut. Profesorul Ion Tudose a văzut în el un loc unde trecutul satului poate fi adăpostit — și a început să adune, lucrurile care spuneau cine suntem.</p>
+</div>
+
+<!-- STORY BEATS -->
+<section class="beats">
+  <div class="beats-grid">
+    <div class="beat">
+      <figure><img src="assets/conac.jpg" alt="Casa-conac Ion Croitoru"></figure>
+      <div class="k">Conacul</div>
+      <h3>O casă a satului</h3>
+      <p>Casa-conac „Ion Croitoru” rămâne una dintre cele mai frumoase clădiri vechi ale satului — cu fronton, cerdac și șase coloane.</p>
+    </div>
+    <div class="beat">
+      <figure><img src="assets/casa-mare.jpg" alt="Interior Casa Mare"></figure>
+      <div class="k">Casa Mare</div>
+      <h3>Inima gospodăriei</h3>
+      <p>Camera de sărbătoare, plină de covoare cu flori, perne brodate și ștergare lucrate de mână.</p>
+    </div>
+    <div class="beat">
+      <figure><img src="assets/sala-expozitie.jpg" alt="Sală de expoziție a muzeului"></figure>
+      <div class="k">Muzeul</div>
+      <h3>O ușă deschisă</h3>
+      <p>Astăzi colecția e deschisă satului, diasporei și oricui vrea să-și cunoască rădăcinile.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS ROW -->
+<section class="collrow">
+  <div class="inner">
+    <div class="head">
+      <h2>Ce adăpostește muzeul</h2>
+      <a href="Colectii.html">Vezi toate exponatele →</a>
+    </div>
+    <div class="grid">
+      <a class="cell" href="Colectii.html">
+        <h3>Casa Mare</h3>
+        <p>Covoare, icoane, ladă de zestre — camera de oaspeți a satului.</p>
+      </a>
+      <a class="cell" href="Colectii.html">
+        <h3>Port popular</h3>
+        <p>Ii, cămăși, brâie și ștergare brodate de pe valea Răutului.</p>
+      </a>
+      <a class="cell" href="Colectii.html">
+        <h3>Unelte</h3>
+        <p>Război de țesut, pietre de moară, vase de lut și gospodărie.</p>
+      </a>
+      <a class="cell" href="Colectii.html">
+        <h3>Documente</h3>
+        <p>Fotografii, acte și spițe de neam — opera donatorilor.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS TEASER -->
+<section class="teaser">
+  <figure><img src="assets/inaugurare-elevi.jpg" alt="Elevi în costume populare în fața muzeului la inaugurare"></figure>
+  <div>
+    <div class="k">Viața muzeului</div>
+    <h2>Inaugurat la 12 octombrie 2025</h2>
+    <p>Muzeul și-a deschis porțile într-o zi de sărbătoare, cu sfințire, cor de copii și întreaga comunitate alături. De atunci, găzduiește vizite, ateliere și sărbători — toate adunate în pagina de evenimente.</p>
+    <a class="link" href="Evenimente.html">Vezi evenimentele →</a>
+  </div>
+</section>
+
+<!-- ION CROITORU -->
+<section class="person">
+  <div class="pmedia">
+    <figure class="pframe">
+      <img src="assets/croitoru.jpg" alt="Ion Croitoru (1918–1940)">
+      <figcaption>
+</figcaption>
+    </figure>
+  </div>
+  <div class="ptext">
+    <div class="k">Memoria locului</div>
+    <h2>Ion Croitoru</h2>
+    <div class="yrs">(1918–1940)</div>
+    <p>Dascăl și boier al Ghidulenilor din perioada interbelică, Ion Croitoru a trăit în conacul care astăzi adăpostește muzeul. Perioada 1918–1940 — administrația românească a Basarabiei — a fost una dintre cele mai fertile pentru viața culturală și educațională a satelor moldovenești.</p>
+    <p>Alegerea acestui loc pentru muzeu nu este întâmplătoare: conacul lui Ion Croitoru este o legătură vie cu istoria intelectuală a localității, cu valorile care au format generații de ghiduleni.</p>
+    <p>Muzeul păstrează memoria acestui om și a epocii sale ca parte integrantă a identității satului.</p>
+  </div>
+</section>
+
+<!-- ION TUDOSE -->
+<section class="person flip">
+  <div class="ptext">
+    <div class="k">Fondatorul muzeului</div>
+    <h2>Ion Tudose</h2>
+    <p>Profesor de istorie, director de școală, poet și Tezaur Uman Viu al comunității din Ghiduleni — Ion Tudose este sufletul și inițiatorul Muzeului din Ghiduleni.</p>
+    <p>Un mare pasionat de istorie, domnia sa a reușit să formeze generații întregi de elevi cu dragoste față de neam și valorile naționale. A îmbogățit cultura locală prin publicarea a două cărți — mărturie a pasiunii pentru valorile istorice și spirituale ale meleagurilor natale.</p>
+    <p class="q">La pensionarea sa, comunitatea i-a adus un omagiu de recunoștință: „Fiecare elev pe care l-ați format, fiecare tradiție pe care ați transmis-o mai departe este o piatră de temelie a prezentului și a viitorului comunității.”</p>
+    <p>Alături de soția sa, Lidia Tudose, continuă să fie vocea vie a trecutului pentru generațiile de astăzi.</p>
+  </div>
+  <div class="pmedia">
+    <figure class="pframe">
+      <img src="assets/tudose-birou.jpg" alt="Ion Tudose la masa de lucru">
+      <figcaption>La masa de lucru</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- GALERIE FONDATOR -->
+<section class="founder-gallery">
+  <figure class="pframe">
+    <img src="assets/tudose-casa-mare.jpg" alt="Ion Tudose în Casa Mare a muzeului" style="object-position:50% 35%">
+    <figcaption>În Casa Mare a muzeului</figcaption>
+  </figure>
+  <figure class="pframe">
+    <img src="assets/ion-tudose.jpg" alt="Ion Tudose la monumentul lui Ioan Rațiu" style="object-position:62% 30%">
+    <figcaption>La monumentul lui Ioan Rațiu, Cluj</figcaption>
+  </figure>
+</section>
+</section>
+
+<!-- SATUL GHIDULENI -->
+<section class="place">
+  <div class="card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 21s-7-6.4-7-11a7 7 0 0 1 14 0c0 4.6-7 11-7 11z"></path>
+      <circle cx="12" cy="10" r="2.4"></circle>
+    </svg>
+    <div class="n">Ghiduleni</div>
+    <div class="r">Raionul Rezina<br>Republica Moldova</div>
+  </div>
+  <div>
+    <div class="k">Locul nostru</div>
+    <h2>Satul Ghiduleni</h2>
+    <p>Siliștea Ghiduleni este atestată documentar la <span class="em">30 iunie 1665</span>, când câțiva răzeși din Ghiduleni figurau ca martori în determinarea hotarelor moșiei Sămășcani. La finele anului 1696, siliștea este menționată într-o carte domnească de la <span class="em">Antioh Cantemir</span>.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="visit" id="vizita">
+  <div class="vwrap">
+    <div>
+      <h3>Muzeul din Ghiduleni</h3>
+      <div class="tag">Istorie și Etnografie</div>
+      <p class="row" style="max-width:34ch; margin-top:12px;">Casa-conac „Ion Croitoru”, satul Ghiduleni, raionul Rezina, Republica Moldova.</p>
+    </div>
+    <div>
+      <div class="lab">Program</div>
+      <div class="row">Marți – Duminică</div>
+      <div class="row">10:00 – 17:00</div>
+      <div class="row">Luni închis</div>
+    </div>
+    <div>
+      <div class="lab">Contact</div>
+      <div class="row">vizite@muzeughiduleni.md</div>
+      <div class="row">+373 254 00 000</div>
+      <div class="row">Ghiduleni, Rezina</div>
+    </div>
+  </div>
+  <div class="credit">© 2025 Muzeul din Ghiduleni · Casa-conac „Ion Croitoru”</div>
+</footer>
+
+<script>
+  (function(){
+    const g = document.querySelector('svg.altita g'); if(!g) return;
+    const cells=32, w=1280/cells; let h='';
+    for(let i=0;i<cells;i++){const cx=i*w+w/2;
+      h+=`<polygon points="${cx},8 ${cx+13},20 ${cx},32 ${cx-13},20"></polygon>`;
+      h+=`<polygon points="${cx},14 ${cx+6},20 ${cx},26 ${cx-6},20" fill="#8e2f1c"></polygon>`;
+      h+=`<line x1="${cx-13}" y1="20" x2="${cx-w/2}" y2="20"></line>`;
+      h+=`<line x1="${cx+13}" y1="20" x2="${cx+w/2}" y2="20"></line>`;}
+    g.innerHTML=h;
+  })();
+</script>
+
+</body>
+</html>
