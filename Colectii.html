@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Colecții · Muzeul din Ghiduleni</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#f5eedf; --parchment:#e8dcc0; --linen:#ece1c7;
+    --clay:#b84a2c; --clay-dark:#8e2f1c; --wine:#5b1a1f;
+    --ochre:#c9892f; --ochre-dark:#9a6418;
+    --forest:#2b4432; --forest-dark:#1a2c1f;
+    --bark:#3a2a1d; --ink:#1f1b16; --stone:#8a7f6b;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Cardo",Georgia,serif; color:var(--bark);
+    background:var(--parchment);
+    background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cg stroke='%233a2a1d' stroke-width='1' opacity='0.05'%3E%3Cline x1='4' y1='4' x2='22' y2='22'/%3E%3Cline x1='22' y1='4' x2='4' y2='22'/%3E%3C/g%3E%3C/svg%3E");
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+
+  .altita{height:24px; width:100%; display:block;}
+
+  /* nav */
+  header.nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 7vw; border-bottom:1px solid rgba(58,42,29,.18);
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--parchment) 92%, transparent);
+    backdrop-filter:saturate(1.1) blur(6px);
+  }
+  .brand{line-height:1; flex-shrink:0;}
+  .brand b{font-size:21px; font-weight:700; letter-spacing:.01em; display:block; white-space:nowrap;}
+  .brand span{font-family:"Inter",sans-serif; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--stone); white-space:nowrap;}
+  .nav nav{display:flex; gap:26px;}
+  .nav nav a{font-family:"Inter",sans-serif; font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--bark); opacity:.8;}
+  .nav nav a.active{color:var(--clay-dark); opacity:1; border-bottom:2px solid var(--clay-dark); padding-bottom:3px;}
+  .nav nav a:hover{opacity:1;}
+
+  /* hero */
+  .hero{position:relative; min-height:min(56vh,460px); display:flex; align-items:flex-end; overflow:hidden;}
+  .hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 42%;}
+  .hero .scrim{position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,16,12,.25) 0%, rgba(20,16,12,.5) 55%, rgba(20,16,12,.8) 100%);}
+  .hero .inner{position:relative; width:100%; padding:0 7vw 48px;}
+  .hero .eyebrow{font-family:"Inter",sans-serif; font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:var(--ochre); margin-bottom:14px;}
+  .hero h1{font-size:clamp(40px,6vw,72px); line-height:1.0; font-weight:700; color:var(--ivory); text-shadow:0 2px 24px rgba(0,0,0,.4);}
+  .hero .sub{font-family:"Inter",sans-serif; font-size:15.5px; color:var(--parchment); margin-top:16px; max-width:54ch; line-height:1.5; opacity:.94;}
+
+  /* collection section */
+  .coll{max-width:1180px; margin:0 auto; padding:74px 7vw 0;}
+  .coll-head{display:flex; align-items:baseline; gap:18px; margin-bottom:30px;}
+  .coll-head .num{font-family:"JetBrains Mono",monospace; font-size:14px; color:var(--clay); padding-top:4px;}
+  .coll-head .eyebrow{font-family:"Inter",sans-serif; font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--clay-dark); margin-bottom:6px;}
+  .coll-head h2{font-size:clamp(30px,3.8vw,46px); line-height:1.02; font-weight:700; color:var(--ink);}
+
+  .coll-body{display:grid; grid-template-columns:1fr 1.15fr; gap:48px; align-items:start;}
+  .coll.flip .coll-body{grid-template-columns:1.15fr 1fr;}
+  .coll.flip .text{order:2;}
+  .coll.flip .media{order:1;}
+  .text p{font-size:18.5px; line-height:1.7; margin-bottom:22px; text-wrap:pretty;}
+  .text p .em{font-style:italic; color:var(--wine);}
+  .text ul{list-style:none; display:flex; flex-direction:column; gap:12px;}
+  .text li{position:relative; padding-left:26px; font-size:16.5px; line-height:1.45; font-family:"Inter",sans-serif; color:var(--bark);}
+  .text li::before{content:""; position:absolute; left:0; top:8px; width:9px; height:9px; background:var(--clay); transform:rotate(45deg);}
+
+  /* media grid */
+  .media{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .media .big{grid-column:span 2; height:340px;}
+  .media .sm{height:172px;}
+  .media figure{margin:0; position:relative; overflow:hidden; background:var(--linen); border:1px solid rgba(58,42,29,.16);}
+  .media img{width:100%; height:100%; object-fit:cover;}
+  .media figcaption{position:absolute; left:0; right:0; bottom:0; padding:16px 12px 9px;
+    background:linear-gradient(180deg,transparent,rgba(20,16,12,.72)); color:var(--ivory);
+    font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase;}
+
+  /* divider */
+  .div{max-width:1180px; margin:74px auto 0; padding:0 7vw;}
+  .div svg{width:100%; height:16px; display:block;}
+
+  /* donate CTA */
+  .cta{margin-top:84px; position:relative; overflow:hidden; background:var(--forest-dark);}
+  .cta-grid{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; align-items:stretch;}
+  .cta-img{position:relative; min-height:360px;}
+  .cta-img img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .cta-text{padding:64px 7vw 64px 56px; color:var(--ivory); display:flex; flex-direction:column; justify-content:center;}
+  .cta-text .eyebrow{font-family:"Inter",sans-serif; font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--ochre); margin-bottom:14px;}
+  .cta-text h2{font-size:clamp(28px,3.4vw,40px); line-height:1.1; font-weight:700; margin-bottom:18px; text-wrap:balance;}
+  .cta-text p{font-family:"Inter",sans-serif; font-size:15.5px; line-height:1.65; color:var(--parchment); margin-bottom:28px; max-width:42ch;}
+  .cta-text a.btn{align-self:flex-start; background:var(--clay); color:var(--ivory); font-family:"Inter",sans-serif; font-size:14px; font-weight:600; letter-spacing:.03em; padding:15px 30px; display:inline-flex; gap:10px; align-items:center;}
+  .cta-text a.btn:hover{background:var(--clay-dark);}
+
+  /* footer */
+  footer.visit{background:var(--bark); color:var(--ivory);}
+  footer .vwrap{max-width:1180px; margin:0 auto; padding:60px 7vw; display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:40px;}
+  footer h3{font-size:28px; font-weight:700; margin-bottom:6px;}
+  footer .tag{font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ochre);}
+  footer .lab{font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ochre); margin-bottom:12px;}
+  footer .row{font-family:"Inter",sans-serif; font-size:14.5px; color:var(--parchment); margin-bottom:6px; line-height:1.55;}
+  footer .credit{border-top:1px solid rgba(245,238,223,.15); padding:20px 7vw; font-family:"Inter",sans-serif; font-size:12.5px; color:var(--stone); text-align:center; letter-spacing:.04em;}
+
+  @media (max-width:820px){
+    .coll-body, .coll.flip .coll-body{grid-template-columns:1fr; gap:28px;}
+    .coll.flip .text{order:1;} .coll.flip .media{order:2;}
+    .cta-grid{grid-template-columns:1fr;}
+    .cta-img{min-height:240px;}
+    .cta-text{padding:44px 7vw;}
+    footer .vwrap{grid-template-columns:1fr; gap:28px;}
+    .nav nav{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<svg class="altita" viewBox="0 0 1280 40" preserveAspectRatio="none" aria-hidden="true">
+  <rect width="100%" height="100%" fill="var(--linen)"></rect>
+  <g stroke="#8e2f1c" fill="none" stroke-width="1.4"></g>
+</svg>
+
+<header class="nav">
+  <a href="index.html" class="brand"><b>Muzeul din Ghiduleni</b><span>Istorie și Etnografie</span></a>
+  <nav>
+    <a href="index.html">Acasă</a>
+    <a href="Povestea.html">Despre</a>
+    <a href="Colectii.html" class="active">Colecții</a>
+    <a href="Evenimente.html">Evenimente</a>
+    <a href="#vizita">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="assets/sala-expozitie.jpg" alt="Sală de expoziție a muzeului din Ghiduleni">
+  <div class="scrim"></div>
+  <div class="inner">
+    <div class="eyebrow">Patrimoniul nostru</div>
+    <h1>Colecțiile muzeului</h1>
+    <div class="sub">Obiecte autentice care reflectă viața și tradițiile satului Ghiduleni de-a lungul timpului — adunate, îngrijite și dăruite de comunitate.</div>
+  </div>
+</div>
+
+<!-- 01 CASA MARE -->
+<section class="coll">
+  <div class="coll-head">
+    <span class="num">01</span>
+    <div>
+      <div class="eyebrow">Expoziție principală</div>
+      <h2>Casa Mare</h2>
+    </div>
+  </div>
+  <div class="coll-body">
+    <div class="text">
+      <p>Inima oricărei case tradiționale moldovenești, <span class="em">Casa Mare</span> era camera de primire — spațiul în care familia își arăta frumusețea și bunăstarea.</p>
+      <p>Reconstituită cu autenticitate, Casa Mare din muzeu cuprinde:</p>
+      <ul>
+        <li>Covoare țesute manual, cu motive geometrice specifice zonei</li>
+        <li>Lada de zestre — piesa centrală a vieții feminine tradiționale</li>
+        <li>Ștergare brodate și cuverturi din lână</li>
+        <li>Icoane vechi și obiecte de cult</li>
+        <li>Mobilier tradițional din lemn masiv</li>
+      </ul>
+    </div>
+    <div class="media">
+      <figure class="big"><img src="assets/casa-mare.jpg" alt="Interiorul Casei Mari cu covoare și perne brodate"><figcaption>Casa Mare · covoare și perne brodate</figcaption></figure>
+      <figure class="sm"><img src="assets/icoane.jpg" alt="Icoane și obiecte de cult"><figcaption>Icoane și obiecte de cult</figcaption></figure>
+      <figure class="sm"><img src="assets/broderii.jpg" alt="Broderii și textile lucrate de mână"><figcaption>Broderii lucrate de mână</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="div"><svg viewBox="0 0 1280 16" preserveAspectRatio="none" aria-hidden="true"><g stroke="#b84a2c" stroke-width="1.2" fill="none" class="band"></g></svg></div>
+
+<!-- 02 PORT -->
+<section class="coll flip">
+  <div class="coll-head">
+    <span class="num">02</span>
+    <div>
+      <div class="eyebrow">Costum și meșteșug</div>
+      <h2>Port popular și textile</h2>
+    </div>
+  </div>
+  <div class="coll-body">
+    <div class="text">
+      <p>Colecția de port și textile adună piesele reprezentative ale costumului tradițional din zona Rezina.</p>
+      <ul>
+        <li>Cămăși cusute cu motive florale și geometrice</li>
+        <li>Fote și catrințe colorate</li>
+        <li>Brâie și cingători tradiționale</li>
+        <li>Opinci și încălțăminte de epocă</li>
+        <li>Accesorii și podoabe tradiționale</li>
+      </ul>
+    </div>
+    <div class="media">
+      <figure class="big"><img src="assets/port.jpg" alt="Port popular — cămăși și ștergare brodate"><figcaption>Port popular și ștergare brodate</figcaption></figure>
+      <figure class="sm"><img src="assets/stergare.jpg" alt="Ștergare brodate expuse pe perete"><figcaption>Ștergare brodate</figcaption></figure>
+      <figure class="sm"><img src="assets/banca-scolara.jpg" alt="Bancă școlară și port de epocă"><figcaption>Bancă școlară · port de epocă</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="div"><svg viewBox="0 0 1280 16" preserveAspectRatio="none" aria-hidden="true"><g stroke="#b84a2c" stroke-width="1.2" fill="none" class="band"></g></svg></div>
+
+<!-- 03 UNELTE -->
+<section class="coll">
+  <div class="coll-head">
+    <span class="num">03</span>
+    <div>
+      <div class="eyebrow">Munca de zi cu zi</div>
+      <h2>Unelte și gospodărie</h2>
+    </div>
+  </div>
+  <div class="coll-body">
+    <div class="text">
+      <p>Diversitatea uneltelor expuse reflectă viața gospodărească a satului basarabean din secolele XIX–XX.</p>
+      <ul>
+        <li>Unelte agricole — pluguri, coase, seceri, grape</li>
+        <li>Instrumente de prelucrare a inului și lânii</li>
+        <li>Război de țesut și unelte textile</li>
+        <li>Mori și instalații tradiționale de măcinat</li>
+        <li>Obiecte legate de viticultura locală</li>
+      </ul>
+    </div>
+    <div class="media">
+      <figure class="big"><img src="assets/razboi-tesut.jpg" alt="Război de țesut și unelte textile"><figcaption>Război de țesut · unelte textile</figcaption></figure>
+      <figure class="sm"><img src="assets/piatra-macinat.jpg" alt="Pietre de moară pentru măcinat"><figcaption>Pietre de moară</figcaption></figure>
+      <figure class="sm"><img src="assets/obiecte.jpg" alt="Vase de lut și obiecte de gospodărie"><figcaption>Vase de lut și gospodărie</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="div"><svg viewBox="0 0 1280 16" preserveAspectRatio="none" aria-hidden="true"><g stroke="#b84a2c" stroke-width="1.2" fill="none" class="band"></g></svg></div>
+
+<!-- 04 DOCUMENTE -->
+<section class="coll flip">
+  <div class="coll-head">
+    <span class="num">04</span>
+    <div>
+      <div class="eyebrow">Memoria scrisă</div>
+      <h2>Documente și fotografii</h2>
+    </div>
+  </div>
+  <div class="coll-body">
+    <div class="text">
+      <p>Arhiva documentară și fotografică a muzeului — memoria scrisă și vizuală a Ghidulenilor.</p>
+      <ul>
+        <li>Fotografii de familie din secolele XIX–XX</li>
+        <li>Documente școlare și acte civile vechi</li>
+        <li>Spițe de neam și arbori genealogici</li>
+        <li>Ziare și publicații din perioada interbelică</li>
+        <li>Hărți istorice ale localității</li>
+      </ul>
+    </div>
+    <div class="media">
+      <figure class="big"><img src="assets/colt-fotografii.jpg" alt="Colț cu fotografii vechi și documente"><figcaption>Fotografii și documente vechi</figcaption></figure>
+      <figure class="sm"><img src="assets/arbore-genealogic.jpg" alt="Arbore genealogic al neamului Croitoru"><figcaption>Spița neamului Croitoru</figcaption></figure>
+      <figure class="sm"><img src="assets/harta-istorica.jpg" alt="Hartă istorică pictată a localității"><figcaption>Hartă istorică pictată</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="div"><svg viewBox="0 0 1280 16" preserveAspectRatio="none" aria-hidden="true"><g stroke="#b84a2c" stroke-width="1.2" fill="none" class="band"></g></svg></div>
+
+<!-- 05 TRADITII -->
+<section class="coll">
+  <div class="coll-head">
+    <span class="num">05</span>
+    <div>
+      <div class="eyebrow">Calendarul popular</div>
+      <h2>Tradiții și obiceiuri</h2>
+    </div>
+  </div>
+  <div class="coll-body">
+    <div class="text">
+      <p>Secțiunea dedicată calendarului popular și obiceiurilor specifice zonei Ghiduleni — viața satului dincolo de obiecte.</p>
+      <ul>
+        <li>Obiceiuri de naștere, nuntă și înmormântare</li>
+        <li>Tradiții de Crăciun și Paști — colinde, urături</li>
+        <li>Obiceiuri agrare — Sânzienele, Rusaliile</li>
+        <li>Meșteșuguri și artizanat local</li>
+        <li>Scenete și teatru popular sătesc</li>
+      </ul>
+    </div>
+    <div class="media">
+      <figure class="big"><img src="assets/arta.jpg" alt="Lucrări de artă și artizanat local"><figcaption>Artizanat și lucrări de mână</figcaption></figure>
+      <figure class="sm"><img src="assets/sabie.jpg" alt="Recuzită pentru sceneta „Muma lui Ștefan cel Mare”"><figcaption>Recuzită · sceneta „Muma lui Ștefan”</figcaption></figure>
+      <figure class="sm"><img src="assets/personalitati.jpg" alt="Personalități ale satului Ghiduleni"><figcaption>Personalitățile satului</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- DONATE CTA -->
+<section class="cta">
+  <div class="cta-grid">
+    <div class="cta-img"><img src="assets/donatori.jpg" alt="Panoul donatorilor și voluntarilor muzeului"></div>
+    <div class="cta-text">
+      <div class="eyebrow">Sprijină muzeul</div>
+      <h2>Aveți un obiect de donat?</h2>
+      <p>Muzeul nostru crește cu fiecare obiect adus de comunitate. Dacă aveți acasă piese vechi — textile, unelte, fotografii, documente — și doriți să le donați sau să le împrumutați muzeului, ne puteți contacta.</p>
+      <a class="btn" href="#vizita">Contactați-ne <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="visit" id="vizita">
+  <div class="vwrap">
+    <div>
+      <h3>Muzeul din Ghiduleni</h3>
+      <div class="tag">Muzeu de Istorie și Etnografie</div>
+      <p class="row" style="max-width:34ch; margin-top:12px;">Casa-conac „Ion Croitoru”, satul Ghiduleni, raionul Rezina, Republica Moldova.</p>
+    </div>
+    <div>
+      <div class="lab">Program</div>
+      <div class="row">Marți – Duminică</div>
+      <div class="row">10:00 – 17:00</div>
+      <div class="row">Luni închis</div>
+    </div>
+    <div>
+      <div class="lab">Contact</div>
+      <div class="row">vizite@muzeughiduleni.md</div>
+      <div class="row">+373 254 00 000</div>
+      <div class="row">Ghiduleni, Rezina</div>
+    </div>
+  </div>
+  <div class="credit">© 2025 Muzeul din Ghiduleni · Casa-conac „Ion Croitoru”</div>
+</footer>
+
+<script>
+  // top altița band
+  (function(){
+    const g = document.querySelector('svg.altita g'); if(!g) return;
+    const cells=32, w=1280/cells; let h='';
+    for(let i=0;i<cells;i++){const cx=i*w+w/2;
+      h+=`<polygon points="${cx},8 ${cx+13},20 ${cx},32 ${cx-13},20"></polygon>`;
+      h+=`<polygon points="${cx},14 ${cx+6},20 ${cx},26 ${cx-6},20" fill="#8e2f1c"></polygon>`;
+      h+=`<line x1="${cx-13}" y1="20" x2="${cx-w/2}" y2="20"></line>`;
+      h+=`<line x1="${cx+13}" y1="20" x2="${cx+w/2}" y2="20"></line>`;}
+    g.innerHTML=h;
+  })();
+  // thin diamond dividers between sections
+  document.querySelectorAll('svg .band').forEach(g=>{
+    const cells=40, w=1280/cells; let h='';
+    for(let i=0;i<cells;i++){const cx=i*w+w/2;
+      h+=`<polygon points="${cx},2 ${cx+6},8 ${cx},14 ${cx-6},8"></polygon>`;}
+    g.innerHTML=h;
+  });
+</script>
+
+</body>
+</html>

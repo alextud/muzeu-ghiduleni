@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Evenimente · Muzeul din Ghiduleni</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#f5eedf; --parchment:#e8dcc0; --linen:#ece1c7;
+    --clay:#b84a2c; --clay-dark:#8e2f1c; --wine:#5b1a1f;
+    --ochre:#c9892f; --ochre-dark:#9a6418;
+    --forest:#2b4432; --forest-dark:#1a2c1f;
+    --bark:#3a2a1d; --ink:#1f1b16; --stone:#8a7f6b;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Cardo",Georgia,serif; color:var(--bark);
+    background:var(--parchment);
+    background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cg stroke='%233a2a1d' stroke-width='1' opacity='0.05'%3E%3Cline x1='4' y1='4' x2='22' y2='22'/%3E%3Cline x1='22' y1='4' x2='4' y2='22'/%3E%3C/g%3E%3C/svg%3E");
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+
+  .altita{height:24px; width:100%; display:block;}
+
+  header.nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 7vw; border-bottom:1px solid rgba(58,42,29,.18);
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--parchment) 92%, transparent);
+    backdrop-filter:saturate(1.1) blur(6px);
+  }
+  .brand{line-height:1; flex-shrink:0;}
+  .brand b{font-size:21px; font-weight:700; letter-spacing:.01em; display:block; white-space:nowrap;}
+  .brand span{font-family:"Inter",sans-serif; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--stone); white-space:nowrap;}
+  .nav nav{display:flex; gap:26px;}
+  .nav nav a{font-family:"Inter",sans-serif; font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--bark); opacity:.8;}
+  .nav nav a.active{color:var(--clay-dark); opacity:1; border-bottom:2px solid var(--clay-dark); padding-bottom:3px;}
+  .nav nav a:hover{opacity:1;}
+
+  /* page header */
+  .page-head{max-width:1180px; margin:0 auto; padding:64px 7vw 8px;}
+  .page-head .eyebrow{font-family:"Inter",sans-serif; font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:var(--clay-dark); margin-bottom:14px;}
+  .page-head h1{font-size:clamp(42px,6vw,76px); line-height:1.0; font-weight:700; color:var(--ink);}
+  .page-head p{font-family:"Inter",sans-serif; font-size:16px; line-height:1.6; color:var(--bark); max-width:60ch; margin-top:18px;}
+
+  /* event article */
+  .feed{max-width:1180px; margin:0 auto; padding:40px 7vw 0;}
+  .event{padding:44px 0 56px; border-top:2px solid rgba(58,42,29,.16);}
+  .event:first-child{border-top:none;}
+  .event .meta{display:flex; align-items:center; gap:14px; margin-bottom:18px; flex-wrap:wrap;}
+  .event .date{font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--bark); background:var(--linen); border:1px solid rgba(58,42,29,.18); padding:6px 12px; white-space:nowrap;}
+  .event .cat{font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ivory); background:var(--clay); padding:6px 12px; font-weight:600; white-space:nowrap;}
+  .event h2{font-size:clamp(28px,4vw,46px); line-height:1.06; font-weight:700; color:var(--ink); margin-bottom:14px; text-wrap:balance;}
+  .event .byline{font-family:"Inter",sans-serif; font-size:13.5px; color:var(--stone); margin-bottom:26px;}
+  .event .body{max-width:760px;}
+  .event .body p{font-size:18.5px; line-height:1.72; margin-bottom:20px; text-wrap:pretty;}
+  .event .body p.lead{font-size:21px; line-height:1.6; color:var(--ink);}
+  .event .body .sig{font-family:"Inter",sans-serif; font-style:normal; font-size:14px; line-height:1.5; color:var(--bark); margin-top:24px; padding-left:18px; border-left:3px solid var(--clay);}
+
+  /* photo gallery */
+  .gallery{display:grid; grid-template-columns:repeat(12,1fr); gap:10px; margin:34px 0;}
+  .gallery figure{margin:0; overflow:hidden; background:var(--linen); border:1px solid rgba(58,42,29,.16);}
+  .gallery img{width:100%; height:100%; object-fit:cover;}
+  .g-tall{grid-column:span 4; height:400px;}
+  .g-wide{grid-column:span 7; height:320px;}
+  .g-port{grid-column:span 5; height:320px;}
+  .gallery .c12{grid-column:span 12;}
+  .gallery .c8{grid-column:span 8;}
+  .gallery .c6{grid-column:span 6;}
+  .gallery .c4{grid-column:span 4;}
+  .h420{height:420px;} .h360{height:360px;} .h300{height:300px;} .h280{height:280px;}
+
+  /* video embed (YouTube) */
+  .video{margin:34px 0;}
+  .video .yt{position:relative; width:100%; aspect-ratio:16/9; background:var(--forest-dark); overflow:hidden; border:1px solid rgba(58,42,29,.2);}
+  .video .yt iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+  .video .placeholder{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; color:var(--ivory); text-align:center; padding:24px;}
+  .video .play{width:74px; height:74px; border-radius:50%; background:var(--clay); display:flex; align-items:center; justify-content:center;}
+  .video .play::after{content:""; width:0; height:0; border-left:22px solid var(--ivory); border-top:13px solid transparent; border-bottom:13px solid transparent; margin-left:5px;}
+  .video .placeholder .t{font-family:"Inter",sans-serif; font-size:15px; font-weight:600; letter-spacing:.02em;}
+  .video .placeholder .s{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ochre); letter-spacing:.08em;}
+  .video figcaption, .gallery + .cap{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--stone); letter-spacing:.06em; text-transform:uppercase; margin-top:10px;}
+
+  /* press / secondary account */
+  .press{margin:34px 0 0; background:var(--linen); border:1px solid rgba(58,42,29,.16); border-left:4px solid var(--ochre); padding:30px 34px; max-width:860px;}
+  .press .lab{font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ochre-dark); margin-bottom:14px;}
+  .press h3{font-size:24px; font-weight:700; line-height:1.15; margin-bottom:14px; color:var(--ink);}
+  .press p{font-size:16.5px; line-height:1.7; margin-bottom:16px; text-wrap:pretty;}
+  .press .people{font-family:"Inter",sans-serif; font-size:14.5px; line-height:1.6; color:var(--bark);}
+  .press .src{font-family:"Inter",sans-serif; font-size:13px; color:var(--stone); margin-top:14px;}
+
+  /* poem block */
+  .poem{margin:34px 0 0; background:var(--forest-dark); color:var(--ivory); padding:48px 7vw; text-align:center;}
+  .poem h3{font-size:clamp(26px,3.4vw,36px); line-height:1.12; font-weight:700; font-style:italic; margin-bottom:30px; color:var(--ivory); text-wrap:balance;}
+  .poem .stanzas{display:flex; flex-wrap:wrap; justify-content:center; gap:30px 64px; max-width:760px; margin:0 auto;}
+  .poem p{font-size:18px; line-height:1.62; font-style:italic; color:var(--parchment); text-align:left;}
+  .poem .sig{font-family:"Inter",sans-serif; font-style:normal; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--ochre); margin-top:32px;}
+
+  /* sources / links */
+  .sources{display:flex; gap:12px; flex-wrap:wrap; margin-top:30px;}
+  .sources a{font-family:"Inter",sans-serif; font-size:13.5px; font-weight:500; padding:11px 20px; border:1.5px solid rgba(58,42,29,.25); display:inline-flex; align-items:center; gap:9px; color:var(--bark);}
+  .sources a:hover{border-color:var(--clay); color:var(--clay-dark);}
+  .sources a.fb{background:#1877f2; color:#fff; border-color:#1877f2;}
+  .sources a.fb:hover{background:#1461c9; color:#fff;}
+
+  /* empty/future note */
+  .more-note{max-width:1180px; margin:0 auto; padding:8px 7vw 80px;}
+  .more-note div{border:1.5px dashed rgba(58,42,29,.3); padding:34px; text-align:center; font-family:"Inter",sans-serif; color:var(--stone); font-size:15px; line-height:1.6;}
+
+  footer.visit{background:var(--bark); color:var(--ivory);}
+  footer .vwrap{max-width:1180px; margin:0 auto; padding:60px 7vw; display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:40px;}
+  footer h3{font-size:28px; font-weight:700; margin-bottom:6px;}
+  footer .tag{font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ochre);}
+  footer .lab{font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ochre); margin-bottom:12px;}
+  footer .row{font-family:"Inter",sans-serif; font-size:14.5px; color:var(--parchment); margin-bottom:6px; line-height:1.55;}
+  footer .credit{border-top:1px solid rgba(245,238,223,.15); padding:20px 7vw; font-family:"Inter",sans-serif; font-size:12.5px; color:var(--stone); text-align:center; letter-spacing:.04em;}
+
+  @media (max-width:820px){
+    .g-tall,.g-wide,.g-port{grid-column:span 12; height:300px;}
+    .gallery .c12,.gallery .c8,.gallery .c6,.gallery .c4{grid-column:span 12; height:280px;}
+    footer .vwrap{grid-template-columns:1fr; gap:28px;}
+    .nav nav{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<svg class="altita" viewBox="0 0 1280 40" preserveAspectRatio="none" aria-hidden="true">
+  <rect width="100%" height="100%" fill="var(--linen)"></rect>
+  <g stroke="#8e2f1c" fill="none" stroke-width="1.4"></g>
+</svg>
+
+<header class="nav">
+  <a href="index.html" class="brand"><b>Muzeul din Ghiduleni</b><span>Istorie și Etnografie</span></a>
+  <nav>
+    <a href="index.html">Acasă</a>
+    <a href="Povestea.html">Despre</a>
+    <a href="Colectii.html">Colecții</a>
+    <a href="Evenimente.html" class="active">Evenimente</a>
+    <a href="#vizita">Contact</a>
+  </nav>
+</header>
+
+<div class="page-head">
+  <div class="eyebrow">Viața muzeului</div>
+  <h1>Evenimente</h1>
+  <p>Inaugurări, vizite, ateliere și sărbători de la Muzeul din Ghiduleni. Aici adunăm momentele care țin comunitatea aproape — cu fotografii, relatări și înregistrări video.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     ȘABLON EVENIMENT NOU
+     Ca să adaugi un eveniment, copiază un bloc <article class="event"> … </article>
+     și pune-l primul în .feed (cele mai noi sus). Schimbă data, titlul, textul.
+     • Galerie foto:  pune imaginile în assets/ și actualizează <img src="…">
+     • Video YouTube: înlocuiește blocul .placeholder din .yt cu:
+         <iframe src="https://www.youtube.com/embed/ID_VIDEO" allowfullscreen></iframe>
+     • Postare Facebook: pune linkul real în butonul <a class="fb" href="…">
+     ════════════════════════════════════════════════════════════════ -->
+
+<div class="feed">
+
+  <!-- EVENIMENT: Ziua Internațională a Muzeelor -->
+  <article class="event">
+    <div class="meta">
+      <span class="date">18 mai 2026</span>
+      <span class="cat">Ziua Muzeelor</span>
+    </div>
+    <h2>Drumul spre deschiderea muzeului — Ziua Internațională a Muzeelor</h2>
+    <div class="byline">Relatare: Sergiu Cumatrenco · „Acasă” — ziar independent, Rep. Moldova · Nr. 20 (551), 29 mai 2026</div>
+    <div class="body">
+      <p class="lead">La 18 mai 2026, Muzeul de Istorie și Etnografie din Ghiduleni a găzduit prima ediție a Zilei Internaționale a Muzeelor, sub genericul „Muzeele care unesc o lume divizată”.</p>
+      <p>Primii oaspeți-vizitatori au fost elevii Școlii primare-grădiniță Ghiduleni și ai Gimnaziului-grădiniță Bușăuca, alături de foști profesori. Doamna director <strong>Svetlana Balenschi</strong> a deschis serbarea „Ușile deschise în muzeu” cu un cuvânt de felicitare, subliniind importanța exponatelor pentru lecțiile de istorie. A fost arborat Drapelul Republicii Moldova, intonându-se Imnul de Stat de către toți elevii prezenți.</p>
+      <p>În <strong>sala 1</strong> — birou, documente, arhivă, personalități — copiii de la grădiniță au prezentat un recital de poezie, iar elevii claselor primare, ghidați de învățătoarele Stela Iftodi și Nadejda Cuiban, au desfășurat activitatea „Povestea unei fotografii”, vorbind despre bunicii și străbunicii lor. Bibliotecara Maricica Galamaga a pregătit o expoziție de carte.</p>
+      <p>În <strong>sala 2</strong>, Secția Istorie și Etnografie, elevii Gimnaziului Bușăuca, îndrumați de Rodica Nica, au devenit „detectivi ai trecutului” și ghizi de muzeu — „Fiecare obiect are o istorie, fiecare istorie ne aparține” — prezentând râșnița, lampa cu gaz, războiul de țesut, oalele de argilă, covata, covorul moldovenesc și lada de zestre.</p>
+      <p>În <strong>sala 3</strong> — Casa Mare, zestrea neamului. Fosta profesoară Lidia Tudose a vorbit despre „școala din familie” și despre muzeu ca școală a tradițiilor, a educației patriotice și a dragostei de sat. Vizitatorii au plecat mulțumiți, promițând că vor reveni.</p>
+      <div class="sig">Sergiu Cumatrenco<br>„Acasă” — publicație periodică independentă, Rep. Moldova</div>
+    </div>
+
+    <!-- POEZIE -->
+    <div class="poem">
+      <h3>La muzeul Croitoru<br>vin semenii cei cu Dorul</h3>
+      <div class="stanzas">
+        <p>La deschideri de muzee<br>N-am participat nicicând,<br>Dar în vis, leit scânteie,<br>Mă vedem colo în gând.</p>
+        <p>Cel director, Croitoru,<br>Și țăran, și-nvățător,<br>Era pentru sat Izvorul,<br>Darul cunoștințelor.<br>Celor tineri dădea carte<br>Și Credință-n vremi mai bune,<br>S-avem Pâine, dar și parte<br>De Tradițiile străbune.</p>
+        <p>Dar sosiră-n zile negre<br>Hoarde roșii de călăi<br>Și, strivind case integre,<br>Certau oamenii, că-s „răi”!</p>
+        <p>Ei l-au dus pe Croitoru<br>În siberiile de gheață,<br>Nimeni să nu-i afle Dorul<br>De știință și… de viață!</p>
+        <p>Îns-aceste firi blamate<br>Duc o zi faima la Muzeu,<br>Și prin curți strâng exponate,<br>Onorând Conacul, zău!</p>
+        <p>…Azi Muzeul cel cu Dorul,<br>Din conacul Croitorul<br>Ici, în Ghiduleni, scânteie,<br>Te așteaptă… fără cheie!..</p>
+      </div>
+      <div class="sig">Ion Tudose · Ghiduleni</div>
+    </div>
+
+    <div class="sources">
+      <a href="Povestea.html">Povestea conacului →</a>
+      <a href="Colectii.html">Explorează colecțiile →</a>
+    </div>
+  </article>
+
+  <!-- EVENIMENT: Reportaj TV Moldova 1 -->
+  <article class="event">
+    <div class="meta">
+      <span class="date">26 aprilie 2026</span>
+      <span class="cat">Reportaj TV</span>
+    </div>
+    <h2>Casa boierului și învățătorului Ion Croitoru, transformată în muzeu</h2>
+    <div class="byline">Teleradio Moldova (Moldova 1) · emisiunea „Mesager”</div>
+    <div class="body">
+      <p class="lead">Postul public Moldova 1 a dedicat un reportaj Muzeului de Istorie și Etnografie din Ghiduleni, difuzat în emisiunea „Mesager”.</p>
+      <p>Casa boierului și învățătorului Ion Croitoru — cel care a decedat în gulagul siberian — a devenit un nou reper cultural pentru satul Ghiduleni, raionul Rezina. Începând cu octombrie 2025, edificiul găzduiește un muzeu de etnografie și istorie locală. Inițiativa aparține profesorului de istorie Ion Tudose, al cărui vis a fost susținut de întreaga comunitate, localnicii contribuind la amenajarea muzeului și donând obiecte ce reflectă trecutul și tradițiile locului.</p>
+    </div>
+    <div class="video">
+      <div class="yt">
+        <iframe src="https://www.youtube.com/embed/kbHIE4yQfVQ" title="Reportaj Mesager — Muzeul din Ghiduleni" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <figcaption>Sursă: Moldova 1 · emisiunea „Mesager”</figcaption>
+    </div>
+    <div class="sources">
+      <a href="https://youtu.be/kbHIE4yQfVQ" target="_blank" rel="noopener">Vezi pe YouTube →</a>
+    </div>
+  </article>
+
+  <!-- EVENIMENT: Inaugurarea -->
+  <article class="event">
+    <div class="meta">
+      <span class="date">12 octombrie 2025</span>
+      <span class="cat">Inaugurare</span>
+    </div>
+    <h2>Un vis devenit realitate: Muzeul satului Ghiduleni și-a deschis porțile</h2>
+    <div class="byline">Relatare de Liuba Stavinschi · GAL „Stejarii Strămoșești”</div>
+
+    <div class="body">
+      <p class="lead">Duminică, 12 octombrie 2025, în satul Ghiduleni, raionul Rezina, a avut loc deschiderea oficială a Muzeului local — un eveniment de suflet care a adunat întreaga comunitate în jurul valorilor, tradițiilor și istoriei locului.</p>
+      <p>Inițiativa aparține profesorului de istorie <strong>Ion Tudose</strong>, un om dedicat culturii și educației, care, susținut cu dragoste și devotament de soția sa, doamna Lidia Tudose, de autoritățile locale, de colegi, săteni, sponsori și voluntari, a reușit să transforme un vis într-o frumoasă realitate. Prin efort comun, au fost adunate numeroase exponate valoroase, care reflectă viața și tradițiile satului Ghiduleni de-a lungul timpului.</p>
+      <p>La eveniment au fost prezenți reprezentanți ai Consiliului Raional Rezina, foști elevi, sponsori, profesori, locuitori ai satului și copii care au bucurat publicul cu momente artistice pline de emoție și culoare.</p>
+      <p>Ziua a fost una luminoasă și senină, după mai multe zile ploioase — parcă în semn de binecuvântare pentru o inițiativă atât de frumoasă. Într-o atmosferă plină de recunoștință și entuziasm, s-au rostit cuvinte de felicitare și apreciere pentru cei care au contribuit la crearea Muzeului, un spațiu care va păstra amintirile, identitatea și sufletul satului Ghiduleni pentru generațiile viitoare.</p>
+      <p>Felicitări domnului Ion Tudose și tuturor celor care au pus umărul la realizarea acestui proiect de mare valoare culturală și educativă!</p>
+      <div class="sig">Liuba Stavinschi<br>Director GAL „Stejarii Strămoșești” · Profesor de istorie</div>
+    </div>
+
+    <!-- GALERIE FOTO -->
+    <div class="gallery">
+      <figure class="c8 h420"><img src="assets/inaugurare-elevi.jpg" alt="Elevi în costume populare în fața muzeului, la inaugurare"></figure>
+      <figure class="c4 h420"><img src="assets/inaugurare-panglica.jpg" alt="Tăierea panglicii la deschiderea muzeului"></figure>
+      <figure class="c6 h280"><img src="assets/inaugurare-cor-mici.jpg" alt="Corul copiilor de la grădiniță cântând la inaugurare"></figure>
+      <figure class="c6 h280"><img src="assets/inaugurare-cor-mari.jpg" alt="Corul elevilor în costume populare"></figure>
+      <figure class="c4 h300"><img src="assets/inaugurare-sfestanie.jpg" alt="Sfeștania de binecuvântare la deschiderea muzeului"></figure>
+      <figure class="c4 h300"><img src="assets/inaugurare-paine.jpg" alt="Fetițe în costum popular cu pâine pe ștergar, pe trepte"></figure>
+      <figure class="c4 h300"><img src="assets/inaugurare-public.jpg" alt="Publicul prezent la inaugurare"></figure>
+      <figure class="c4 h360"><img src="assets/inaugurare-grup.jpg" alt="Fotografie de grup în fața panoului donatorilor"></figure>
+      <figure class="c4 h360"><img src="assets/inaugurare-flori.jpg" alt="Crizanteme galbene în fața cerdacului împodobit"></figure>
+      <figure class="c4 h360"><img src="assets/inaugurare-vizita.jpg" alt="Vizitatori în interiorul muzeului la deschidere"></figure>
+      <figure class="c12 h360"><img src="assets/inaugurare-cor.jpg" alt="Copii în costume populare cântând la inaugurare"></figure>
+    </div>
+    <div class="cap">Fotografii de la inaugurarea din 12 octombrie 2025</div>
+
+    <!-- RELATARE SECUNDARĂ (presă) -->
+    <div class="press">
+      <div class="lab">Relatare · Secția Cultură Rezina</div>
+      <h3>O casă a memoriei și a sufletului</h3>
+      <p>Există locuri în care timpul pare să respire prin pereți, iar trecutul își găsește glas prin obiecte, imagini și povestiri. Un astfel de loc s-a născut de curând în raionul Rezina — Muzeul de Istorie și Etnografie din satul Ghiduleni, inaugurat la 12 octombrie 2025, într-o atmosferă de profundă emoție și recunoștință.</p>
+      <p>Acolo unde odinioară se afla conacul boierului Ion Croitoru (1918–1940), astăzi s-a ridicat o nouă poartă către amintire. Cel care a visat și a dăruit viață acestui vis este Ion Tudose, profesor de istorie, director de școală și poet — un om care a simțit că fiecare generație are datoria de a păstra rădăcinile vii.</p>
+      <p>Realizarea acestui proiect de suflet a fost posibilă prin sprijinul domnului Vitalie Galamaga, primar al satului Ghiduleni, al donatorilor, al profesorilor și discipolilor, dar și al tuturor oamenilor care au înțeles că păstrarea patrimoniului național este o formă de iubire față de neam.</p>
+      <p class="people">La inaugurare au fost prezenți, printre alți oaspeți de onoare: dl Valentin Rotari, vicepreședinte al raionului Rezina; dna Iulia Popa, șefa Secției Cultură Rezina; dna Angela Ursache, specialist principal pentru biblioteci, patrimoniu și muzee; dna Angela Racu, director al Palatului Raional de Cultură „Nicolae Lupov”; dna Liuba Stavinschi, consilier raional și director GAL „Stejarii Strămoșești”.</p>
+      <p>Fie ca Muzeul de Istorie și Etnografie din Ghiduleni să devină o școală a memoriei — un loc unde copiii vor învăța respectul pentru înaintași, iar vizitatorii vor simți că aici, în fiecare obiect, bate inima Moldovei adevărate.</p>
+      <div class="src">Text: Secția Cultură Rezina</div>
+    </div>
+
+    <!-- SURSE / LINKURI -->
+    <div class="sources">
+      <a class="fb" href="#" target="_blank" rel="noopener">Vezi pe Facebook →</a>
+      <a href="Colectii.html">Explorează colecțiile →</a>
+    </div>
+  </article>
+
+</div>
+
+<div class="more-note">
+  <div>Mai multe evenimente vor fi adăugate aici, pe măsură ce muzeul găzduiește vizite, ateliere și sărbători.</div>
+</div>
+
+<footer class="visit" id="vizita">
+  <div class="vwrap">
+    <div>
+      <h3>Muzeul din Ghiduleni</h3>
+      <div class="tag">Muzeu de Istorie și Etnografie</div>
+      <p class="row" style="max-width:34ch; margin-top:12px;">Casa-conac „Ion Croitoru”, satul Ghiduleni, raionul Rezina, Republica Moldova.</p>
+    </div>
+    <div>
+      <div class="lab">Program</div>
+      <div class="row">Marți – Duminică</div>
+      <div class="row">10:00 – 17:00</div>
+      <div class="row">Luni închis</div>
+    </div>
+    <div>
+      <div class="lab">Contact</div>
+      <div class="row">vizite@muzeughiduleni.md</div>
+      <div class="row">+373 254 00 000</div>
+      <div class="row">Ghiduleni, Rezina</div>
+    </div>
+  </div>
+  <div class="credit">© 2025 Muzeul din Ghiduleni · Casa-conac „Ion Croitoru”</div>
+</footer>
+
+<script>
+  (function(){
+    const g = document.querySelector('svg.altita g'); if(!g) return;
+    const cells=32, w=1280/cells; let h='';
+    for(let i=0;i<cells;i++){const cx=i*w+w/2;
+      h+=`<polygon points="${cx},8 ${cx+13},20 ${cx},32 ${cx-13},20"></polygon>`;
+      h+=`<polygon points="${cx},14 ${cx+6},20 ${cx},26 ${cx-6},20" fill="#8e2f1c"></polygon>`;
+      h+=`<line x1="${cx-13}" y1="20" x2="${cx-w/2}" y2="20"></line>`;
+      h+=`<line x1="${cx+13}" y1="20" x2="${cx+w/2}" y2="20"></line>`;}
+    g.innerHTML=h;
+  })();
+</script>
+
+</body>
+</html>
