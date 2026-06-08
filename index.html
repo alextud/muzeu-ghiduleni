@@ -263,17 +263,5 @@
 <!-- FOOTER -->
 {% include footer.html %}
 
-<script>
-  (function(){
-    const g = document.querySelector('svg.altita g'); if(!g) return;
-    const cells=32, w=1280/cells; let h='';
-    for(let i=0;i<cells;i++){const cx=i*w+w/2;
-      h+=`<polygon points="${cx},8 ${cx+13},20 ${cx},32 ${cx-13},20"></polygon>`;
-      h+=`<polygon points="${cx},14 ${cx+6},20 ${cx},26 ${cx-6},20" fill="#8e2f1c"></polygon>`;
-      h+=`<line x1="${cx-13}" y1="20" x2="${cx-w/2}" y2="20"></line>`;
-      h+=`<line x1="${cx+13}" y1="20" x2="${cx+w/2}" y2="20"></line>`;}
-    g.innerHTML=h;
-  })();
-</script>
 </body>
 </html>

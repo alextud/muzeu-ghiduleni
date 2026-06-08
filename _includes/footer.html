@@ -60,3 +60,37 @@
   });
 })();
 </script>
+
+<script>
+// Draw the woven rhombus ornaments (top altița band + section dividers)
+// procedurally, sized to each element's actual width so the rhombuses keep a
+// constant pitch instead of squishing on narrow screens. Recomputes on resize.
+(function(){
+  function row(svg, vbH, pitch, build){
+    if(!svg) return;
+    var g=svg.querySelector('g');
+    if(!g) return;
+    var W=Math.round(svg.getBoundingClientRect().width);
+    if(!W) return;
+    svg.setAttribute('viewBox','0 0 '+W+' '+vbH);
+    var cells=Math.max(4,Math.round(W/pitch)), w=W/cells, h='';
+    for(var i=0;i<cells;i++){ h+=build(i*w+w/2, w); }
+    g.innerHTML=h;
+  }
+  function altita(cx, w){
+    return '<polygon points="'+cx+',8 '+(cx+13)+',20 '+cx+',32 '+(cx-13)+',20"></polygon>'
+      +'<polygon points="'+cx+',14 '+(cx+6)+',20 '+cx+',26 '+(cx-6)+',20" fill="#8e2f1c"></polygon>'
+      +'<line x1="'+(cx-13)+'" y1="20" x2="'+(cx-w/2)+'" y2="20"></line>'
+      +'<line x1="'+(cx+13)+'" y1="20" x2="'+(cx+w/2)+'" y2="20"></line>';
+  }
+  function band(cx){
+    return '<polygon points="'+cx+',2 '+(cx+6)+',8 '+cx+',14 '+(cx-6)+',8"></polygon>';
+  }
+  function draw(){
+    document.querySelectorAll('svg.altita').forEach(function(svg){ row(svg,40,40,altita); });
+    document.querySelectorAll('svg .band').forEach(function(g){ row(g.closest('svg'),16,32,band); });
+  }
+  draw();
+  var t; addEventListener('resize',function(){clearTimeout(t); t=setTimeout(draw,150);});
+})();
+</script>
