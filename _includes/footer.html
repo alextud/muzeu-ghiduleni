@@ -34,3 +34,29 @@
   window.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
 })();
 </script>
+
+<script>
+// Theme toggle (light/dark). The initial theme is set in the <head> script.
+(function(){
+  var root=document.documentElement;
+  var toggles=document.querySelectorAll('[data-theme-toggle]');
+  if(!toggles.length)return;
+  var MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  var SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  function render(){
+    var dark=root.dataset.theme==='dark';
+    toggles.forEach(function(t){
+      t.setAttribute('aria-label', dark?'Comută la modul luminos':'Comută la modul întunecat');
+      t.innerHTML=dark?SUN:MOON;
+    });
+  }
+  render();
+  toggles.forEach(function(t){
+    t.addEventListener('click',function(){
+      root.dataset.theme = root.dataset.theme==='dark' ? 'light' : 'dark';
+      try{localStorage.setItem('theme',root.dataset.theme);}catch(e){}
+      render();
+    });
+  });
+})();
+</script>

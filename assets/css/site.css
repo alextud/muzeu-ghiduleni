@@ -39,6 +39,9 @@ header.nav{
 .nav nav a:hover{opacity:1;}
 .nav-toggle{display:none; background:none; border:0; cursor:pointer; padding:8px; margin:-8px; color:var(--bark);}
 .nav-toggle svg{width:28px; height:28px; display:block;}
+.nav-right{display:flex; align-items:center; gap:22px;}
+.theme-toggle{background:none; border:0; cursor:pointer; padding:8px; margin:-8px; color:var(--bark); display:inline-flex; align-items:center;}
+.theme-toggle svg{width:16px; height:16px; display:block; transform:translateY(-2px);}
 
 /* footer */
 footer.visit{margin-top:84px; background:var(--bark); color:var(--ivory);}
@@ -59,3 +62,56 @@ footer .credit{border-top:1px solid rgba(245,238,223,.15); padding:22px 7vw; fon
   .nav nav a:last-child{border-bottom:none;}
   .nav nav a.active{color:var(--clay-dark); border-bottom:1px solid rgba(58,42,29,.1); padding-bottom:14px;}
 }
+
+/* ============================================================
+   Dark theme. JS always sets data-theme on <html> (from
+   localStorage or the OS prefers-color-scheme), so only the
+   [data-theme="dark"] overrides are needed here.
+
+   The palette tokens are named by colour, not by role, and a
+   few (--bark, --parchment) double as both text and surface.
+   So we flip the tokens to their dark-mode values, then add a
+   handful of overrides where a flipped token was being used as
+   a background on the already-dark sections (footer, CTAs).
+   ============================================================ */
+[data-theme="dark"]{
+  --parchment:#1a1510;   /* page background — matched to the Vercel dark base */
+  --linen:#241b11;       /* minor surfaces (altița rect, media tiles) */
+  --ivory:#ece1d0;       /* light foreground — kept light */
+  --bark:#e8ddd0;        /* body text — flipped to light, brightened to match Vercel */
+  --ink:#f4ece0;         /* headings */
+  --stone:#9b8c78;       /* muted text */
+  --clay:#d4694a;        /* accent (buttons) — brightened for dark */
+  --clay-dark:#e27d57;   /* active link / accent text */
+  --wine:#df9077;        /* emphasis text */
+  --ochre:#d6a253;       /* labels / eyebrows */
+  --ochre-dark:#bd8a3e;
+  --forest:#83b276;      /* link text — brightened */
+  --forest-dark:#15281c; /* dark CTA background — stays dark */
+}
+/* Layered dark surfaces (mirrors the Vercel depth scale):
+   footer/CTA = sunken (darkest anchor); collrow grid = raised (lighter). */
+[data-theme="dark"] footer.visit{background:#120f0a;}
+[data-theme="dark"] .collrow,
+[data-theme="dark"] .collrow .cell{background:#211a12;}
+/* light text on those sections that referenced --parchment (now dark) */
+[data-theme="dark"] footer .row,
+[data-theme="dark"] .collrow .cell p,
+[data-theme="dark"] .cta-text p,
+[data-theme="dark"] .poem p,
+[data-theme="dark"] .hero .sub{color:#cfc2ad;}
+/* dark mode: replace the woven texture with the Vercel-style hero wash —
+   two soft radial glows (warm clay centre-left + green top-right) plus a
+   faint diagonal hairline pattern, anchored to the top band of the page. */
+[data-theme="dark"] body{
+  background-image:
+    radial-gradient(closest-side, color-mix(in srgb, var(--clay) 22%, transparent), transparent),
+    radial-gradient(closest-side, color-mix(in srgb, var(--forest) 16%, transparent), transparent),
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cg stroke='%23e8ddd0' stroke-width='1' opacity='0.04'%3E%3Cline x1='4' y1='4' x2='22' y2='22'/%3E%3Cline x1='22' y1='4' x2='4' y2='22'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:no-repeat, no-repeat, repeat;
+  background-size:1200px 820px, 950px 680px, 26px 26px;
+  background-position:6% 1080px, 94% 820px, 0 0;
+}
+/* lighten hairline borders so they read on dark surfaces */
+[data-theme="dark"] header.nav,
+[data-theme="dark"] .nav nav{border-bottom-color:rgba(245,238,223,.14);}

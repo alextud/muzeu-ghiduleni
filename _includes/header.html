@@ -1,3 +1,7 @@
+<script>
+  // Set the theme before first paint to avoid a flash of the wrong theme.
+  (function(){try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=t||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');}catch(e){}})();
+</script>
 <svg class="altita" viewBox="0 0 1280 40" preserveAspectRatio="none" aria-hidden="true">
   <rect width="100%" height="100%" fill="var(--linen)"></rect>
   <g stroke="#8e2f1c" fill="none" stroke-width="1.4"></g>
@@ -5,12 +9,15 @@
 
 <header class="nav">
   <a href="index.html" class="brand"><b>Muzeul din Ghiduleni</b><span>Istorie și Etnografie</span></a>
-  <nav>
-    <a href="index.html"{% if include.active == "acasa" %} class="active"{% endif %}>Acasă</a>
-    <a href="despre.html"{% if include.active == "despre" %} class="active"{% endif %}>Despre</a>
-    <a href="colectii.html"{% if include.active == "colectii" %} class="active"{% endif %}>Colecții</a>
-    <a href="evenimente.html"{% if include.active == "evenimente" %} class="active"{% endif %}>Evenimente</a>
-    <a href="#vizita">Contact</a>
-  </nav>
-  <button class="nav-toggle" type="button" aria-label="Deschide meniul" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  <div class="nav-right">
+    <nav>
+      <a href="index.html"{% if include.active == "acasa" %} class="active"{% endif %}>Acasă</a>
+      <a href="despre.html"{% if include.active == "despre" %} class="active"{% endif %}>Despre</a>
+      <a href="colectii.html"{% if include.active == "colectii" %} class="active"{% endif %}>Colecții</a>
+      <a href="evenimente.html"{% if include.active == "evenimente" %} class="active"{% endif %}>Evenimente</a>
+      <a href="#vizita">Contact</a>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Comută tema" data-theme-toggle><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    <button class="nav-toggle" type="button" aria-label="Deschide meniul" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  </div>
 </header>
