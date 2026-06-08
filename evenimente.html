@@ -31,7 +31,7 @@
   header.nav{
     display:flex; align-items:center; justify-content:space-between;
     padding:18px 7vw; border-bottom:1px solid rgba(58,42,29,.18);
-    position:sticky; top:0; z-index:20;
+    position:sticky; top:0; z-index:50;
     background:color-mix(in srgb, var(--parchment) 92%, transparent);
     backdrop-filter:saturate(1.1) blur(6px);
   }
@@ -41,7 +41,11 @@
   .nav nav{display:flex; gap:26px;}
   .nav nav a{font-family:"Inter",sans-serif; font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--bark); opacity:.8;}
   .nav nav a.active{color:var(--clay-dark); opacity:1; border-bottom:2px solid var(--clay-dark); padding-bottom:3px;}
-  .nav nav a:hover{opacity:1;}
+    .nav nav a:hover{opacity:1;}
+  .nav-toggle{display:none; background:none; border:0; cursor:pointer; padding:6px; margin:-6px; color:var(--bark); position:relative; z-index:60;}
+  .nav-toggle svg{width:26px; height:26px; display:block;}
+  .nav-backdrop{position:fixed; inset:0; background:rgba(20,16,12,.5); opacity:0; visibility:hidden; transition:opacity .25s ease; z-index:30;}
+  .nav-backdrop.open{opacity:1; visibility:visible;}
 
   /* page header */
   .page-head{max-width:1180px; margin:0 auto; padding:64px 7vw 8px;}
@@ -123,7 +127,11 @@
     .g-tall,.g-wide,.g-port{grid-column:span 12; height:300px;}
     .gallery .c12,.gallery .c8,.gallery .c6,.gallery .c4{grid-column:span 12; height:280px;}
     footer .vwrap{grid-template-columns:1fr; gap:28px;}
-    .nav nav{display:none;}
+    .nav-toggle{display:block;}
+    .nav nav{position:fixed; top:0; right:0; bottom:0; width:min(80vw,300px); display:flex; flex-direction:column; align-items:stretch; gap:0; padding:88px 26px 32px; background:var(--linen); box-shadow:-10px 0 36px rgba(0,0,0,.28); transform:translateX(100%); transition:transform .3s ease; z-index:40; overflow-y:auto;}
+    .nav nav.open{transform:translateX(0);}
+    .nav nav a{font-size:15px; letter-spacing:.06em; padding:15px 2px; opacity:1; border-bottom:1px solid rgba(58,42,29,.12);}
+    .nav nav a.active{color:var(--clay-dark); border-bottom:1px solid rgba(58,42,29,.12); padding-bottom:15px;}
   }
 </style>
 </head>
@@ -143,7 +151,9 @@
     <a href="evenimente.html" class="active">Evenimente</a>
     <a href="#vizita">Contact</a>
   </nav>
+  <button class="nav-toggle" type="button" aria-label="Deschide meniul" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
 </header>
+<div class="nav-backdrop"></div>
 
 <div class="page-head">
   <div class="eyebrow">Viața muzeului</div>
@@ -314,5 +324,20 @@
   })();
 </script>
 
+<script>
+(function(){
+  var btn=document.querySelector('.nav-toggle');
+  var menu=document.querySelector('header.nav nav');
+  var back=document.querySelector('.nav-backdrop');
+  if(!btn||!menu)return;
+  var bars='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+  var x='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+  function set(o){menu.classList.toggle('open',o); if(back) back.classList.toggle('open',o); btn.setAttribute('aria-expanded',String(o)); btn.setAttribute('aria-label',o?'Inchide meniul':'Deschide meniul'); btn.innerHTML=o?x:bars; document.body.style.overflow=o?'hidden':'';}
+  btn.addEventListener('click',function(){set(!menu.classList.contains('open'));});
+  if(back) back.addEventListener('click',function(){set(false);});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+  window.addEventListener('keydown',function(e){if(e.key==='Escape') set(false);});
+})();
+</script>
 </body>
 </html>
