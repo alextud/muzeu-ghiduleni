@@ -1,3 +1,5 @@
+---
+---
 <!doctype html>
 <html lang="ro">
 <head>
@@ -7,50 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css" />
 <style>
-  :root{
-    --ivory:#f5eedf; --parchment:#e8dcc0; --linen:#ece1c7;
-    --clay:#b84a2c; --clay-dark:#8e2f1c; --wine:#5b1a1f;
-    --ochre:#c9892f; --ochre-dark:#9a6418;
-    --forest:#2b4432; --forest-dark:#1a2c1f;
-    --bark:#3a2a1d; --ink:#1f1b16; --stone:#8a7f6b;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:"Cardo",Georgia,serif; color:var(--bark);
-    background:var(--parchment);
-    background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cg stroke='%233a2a1d' stroke-width='1' opacity='0.05'%3E%3Cline x1='4' y1='4' x2='22' y2='22'/%3E%3Cline x1='22' y1='4' x2='4' y2='22'/%3E%3C/g%3E%3C/svg%3E");
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit; text-decoration:none;}
-  img{display:block; max-width:100%;}
   .mono{font-family:"JetBrains Mono",monospace;}
   .sans{font-family:"Inter",sans-serif;}
-
-  /* ---- top altița band ---- */
-  .altita{height:24px; width:100%; display:block;}
-
-  /* ---- nav ---- */
-  header.nav{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:20px 7vw; border-bottom:1px solid rgba(58,42,29,.18);
-    position:sticky; top:0; z-index:20;
-    background:color-mix(in srgb, var(--parchment) 92%, transparent);
-    backdrop-filter:saturate(1.1) blur(6px);
-  }
-  .brand{line-height:1; flex-shrink:0;}
-  .brand b{font-size:21px; font-weight:700; letter-spacing:.01em; display:block; white-space:nowrap;}
-  .brand span{font-family:"Inter",sans-serif; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--stone); white-space:nowrap;}
-  .nav nav{display:flex; gap:26px;}
-  .nav nav a{font-family:"Inter",sans-serif; font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--bark); opacity:.8;}
-  .nav nav a.active{color:var(--clay-dark); opacity:1; border-bottom:2px solid var(--clay-dark); padding-bottom:3px;}
-    .nav nav a:hover{opacity:1;}
-  .nav-toggle{display:none; background:none; border:0; cursor:pointer; padding:8px; margin:-8px; color:var(--bark);}
-  .nav-toggle svg{width:28px; height:28px; display:block;}
-  .nav-close{display:none;}
-  .nav-backdrop{position:fixed; inset:0; background:rgba(20,16,12,.5); opacity:0; visibility:hidden; transition:opacity .25s ease; z-index:55;}
-  .nav-backdrop.open{opacity:1; visibility:visible;}
 
   /* ---- hero ---- */
   .hero{position:relative; min-height:min(90vh,760px); display:flex; align-items:flex-end; overflow:hidden;}
@@ -97,53 +59,16 @@
   .fact .n{font-size:38px; font-weight:700; color:var(--ink); line-height:1;}
   .fact .l{font-family:"Inter",sans-serif; font-size:12px; color:var(--bark); margin-top:8px; line-height:1.4;}
 
-  /* visit footer */
-  footer.visit{margin-top:84px; background:var(--bark); color:var(--ivory);}
-  footer .vwrap{max-width:1180px; margin:0 auto; padding:64px 7vw; display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:40px;}
-  footer h3{font-size:30px; font-weight:700; margin-bottom:10px;}
-  footer .lab{font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ochre); margin-bottom:12px;}
-  footer .row{font-family:"Inter",sans-serif; font-size:14.5px; color:var(--parchment); margin-bottom:6px; line-height:1.55;}
-  footer .credit{border-top:1px solid rgba(245,238,223,.15); padding:22px 7vw; font-family:"Inter",sans-serif; font-size:12.5px; color:var(--stone); text-align:center; letter-spacing:.04em;}
-
   @media (max-width:720px){
     .duo{grid-template-columns:1fr;}
     .duo img{height:260px;}
     .facts{grid-template-columns:repeat(2,1fr); gap:16px;}
-    header.nav{backdrop-filter:none; -webkit-backdrop-filter:none;}
-    .nav-toggle{display:block;}
-    .nav nav{position:fixed; top:0; right:0; bottom:0; width:min(84vw,320px); display:flex; flex-direction:column; align-items:stretch; gap:0; padding:20px 24px 36px; background:var(--ivory); box-shadow:-14px 0 44px rgba(0,0,0,.32); transform:translateX(100%); transition:transform .3s ease; z-index:60; overflow-y:auto;}
-    .nav nav.open{transform:translateX(0);}
-    .nav-close{display:flex; align-self:flex-end; background:none; border:0; cursor:pointer; padding:8px; margin:0 -8px 10px 0; color:var(--bark);}
-    .nav-close svg{width:28px; height:28px; display:block;}
-    .nav nav a{font-size:16px; letter-spacing:.08em; padding:16px 2px; opacity:1; border-bottom:1px solid rgba(58,42,29,.14);}
-    .nav nav a.active{color:var(--clay-dark); border-bottom:1px solid rgba(58,42,29,.14); padding-bottom:16px;}
   }
 </style>
 </head>
 <body>
 
-<!-- top altița band -->
-<svg class="altita" viewBox="0 0 1280 40" preserveAspectRatio="none" aria-hidden="true">
-  <rect width="100%" height="100%" fill="var(--linen)"></rect>
-  <g stroke="#8e2f1c" fill="none" stroke-width="1.4">
-    <!-- generated row of rhombuses -->
-    <script type="application/json" id="noop"></script>
-  </g>
-</svg>
-
-<header class="nav">
-  <a href="index.html" class="brand"><b>Muzeul din Ghiduleni</b><span>Istorie și Etnografie</span></a>
-  <nav>
-    <button class="nav-close" type="button" aria-label="Inchide meniul"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    <a href="index.html">Acasă</a>
-    <a href="despre.html" class="active">Despre</a>
-    <a href="colectii.html">Colecții</a>
-    <a href="evenimente.html">Evenimente</a>
-    <a href="#vizita">Contact</a>
-  </nav>
-  <button class="nav-toggle" type="button" aria-label="Deschide meniul" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-  <div class="nav-backdrop"></div>
-</header>
+{% include header.html active="despre" %}
 
 <!-- HERO -->
 <div class="hero">
@@ -245,27 +170,7 @@
 </div>
 
 <!-- VISIT -->
-<footer class="visit" id="vizita">
-  <div class="vwrap">
-    <div>
-      <h3>Vino să vezi conacul</h3>
-      <p class="row" style="max-width:36ch; margin-top:8px;">Casa-conac „Ion Croitoru”, satul Ghiduleni, raionul Rezina, Republica Moldova. La 7 km de traseul Chișinău–Rezina, prin Busăuca.</p>
-    </div>
-    <div>
-      <div class="lab">Program</div>
-      <div class="row">Marți – Duminică</div>
-      <div class="row">10:00 – 17:00</div>
-      <div class="row">Luni închis</div>
-    </div>
-    <div>
-      <div class="lab">Contact</div>
-      <div class="row">vizite@muzeughiduleni.md</div>
-      <div class="row">+373 254 00 000</div>
-      <div class="row">Ghiduleni, Rezina</div>
-    </div>
-  </div>
-  <div class="credit">Muzeul de istorie și etnografie al comunei Ghiduleni</div>
-</footer>
+{% include footer.html %}
 
 <script>
   // build the top altița band (row of rhombuses) procedurally
@@ -283,22 +188,6 @@
     }
     g.innerHTML = html;
   })();
-</script>
-
-<script>
-(function(){
-  var openBtn=document.querySelector('.nav-toggle');
-  var menu=document.querySelector('header.nav nav');
-  var back=document.querySelector('.nav-backdrop');
-  var closeBtn=document.querySelector('.nav-close');
-  if(!openBtn||!menu)return;
-  function set(o){menu.classList.toggle('open',o); if(back)back.classList.toggle('open',o); openBtn.setAttribute('aria-expanded',String(o)); document.body.style.overflow=o?'hidden':'';}
-  openBtn.addEventListener('click',function(){set(true);});
-  if(closeBtn)closeBtn.addEventListener('click',function(){set(false);});
-  if(back)back.addEventListener('click',function(){set(false);});
-  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
-  window.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
-})();
 </script>
 </body>
 </html>
