@@ -42,7 +42,12 @@
   .nav nav{display:flex; gap:26px;}
   .nav nav a{font-family:"Inter",sans-serif; font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--bark); opacity:.8;}
   .nav nav a.active{color:var(--clay-dark); opacity:1; border-bottom:2px solid var(--clay-dark); padding-bottom:3px;}
-  .nav nav a:hover{opacity:1;}
+    .nav nav a:hover{opacity:1;}
+  .nav-toggle{display:none; background:none; border:0; cursor:pointer; padding:8px; margin:-8px; color:var(--bark);}
+  .nav-toggle svg{width:28px; height:28px; display:block;}
+  .nav-close{display:none;}
+  .nav-backdrop{position:fixed; inset:0; background:rgba(20,16,12,.5); opacity:0; visibility:hidden; transition:opacity .25s ease; z-index:55;}
+  .nav-backdrop.open{opacity:1; visibility:visible;}
 
   /* hero */
   .hero{position:relative; min-height:min(56vh,460px); display:flex; align-items:flex-end; overflow:hidden;}
@@ -112,7 +117,14 @@
     .cta-img{min-height:240px;}
     .cta-text{padding:44px 7vw;}
     footer .vwrap{grid-template-columns:1fr; gap:28px;}
-    .nav nav{display:none;}
+    header.nav{backdrop-filter:none; -webkit-backdrop-filter:none;}
+    .nav-toggle{display:block;}
+    .nav nav{position:fixed; top:0; right:0; bottom:0; width:min(84vw,320px); display:flex; flex-direction:column; align-items:stretch; gap:0; padding:20px 24px 36px; background:var(--ivory); box-shadow:-14px 0 44px rgba(0,0,0,.32); transform:translateX(100%); transition:transform .3s ease; z-index:60; overflow-y:auto;}
+    .nav nav.open{transform:translateX(0);}
+    .nav-close{display:flex; align-self:flex-end; background:none; border:0; cursor:pointer; padding:8px; margin:0 -8px 10px 0; color:var(--bark);}
+    .nav-close svg{width:28px; height:28px; display:block;}
+    .nav nav a{font-size:16px; letter-spacing:.08em; padding:16px 2px; opacity:1; border-bottom:1px solid rgba(58,42,29,.14);}
+    .nav nav a.active{color:var(--clay-dark); border-bottom:1px solid rgba(58,42,29,.14); padding-bottom:16px;}
   }
 </style>
 </head>
@@ -126,13 +138,16 @@
 <header class="nav">
   <a href="index.html" class="brand"><b>Muzeul din Ghiduleni</b><span>Istorie și Etnografie</span></a>
   <nav>
+    <button class="nav-close" type="button" aria-label="Inchide meniul"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <a href="index.html">Acasă</a>
     <a href="despre.html">Despre</a>
     <a href="colectii.html" class="active">Colecții</a>
     <a href="evenimente.html">Evenimente</a>
     <a href="#vizita">Contact</a>
   </nav>
+  <button class="nav-toggle" type="button" aria-label="Deschide meniul" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
 </header>
+<div class="nav-backdrop"></div>
 
 <!-- HERO -->
 <div class="hero">
@@ -352,5 +367,20 @@
   });
 </script>
 
+<script>
+(function(){
+  var openBtn=document.querySelector('.nav-toggle');
+  var menu=document.querySelector('header.nav nav');
+  var back=document.querySelector('.nav-backdrop');
+  var closeBtn=document.querySelector('.nav-close');
+  if(!openBtn||!menu)return;
+  function set(o){menu.classList.toggle('open',o); if(back)back.classList.toggle('open',o); openBtn.setAttribute('aria-expanded',String(o)); document.body.style.overflow=o?'hidden':'';}
+  openBtn.addEventListener('click',function(){set(true);});
+  if(closeBtn)closeBtn.addEventListener('click',function(){set(false);});
+  if(back)back.addEventListener('click',function(){set(false);});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+  window.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+})();
+</script>
 </body>
 </html>
