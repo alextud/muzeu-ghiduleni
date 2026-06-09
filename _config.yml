@@ -1,3 +1,6 @@
 title: Muzeul din Ghiduleni
+url: https://muzeu-ghiduleni.eu
+plugins:
+  - jekyll-sitemap
 exclude:
   - .DS_Store

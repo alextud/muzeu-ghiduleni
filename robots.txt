@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://muzeu-ghiduleni.eu/sitemap.xml
