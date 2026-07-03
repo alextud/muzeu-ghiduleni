@@ -94,3 +94,38 @@
   var t; addEventListener('resize',function(){clearTimeout(t); t=setTimeout(draw,150);});
 })();
 </script>
+
+<script>
+// Lightbox: click any gallery photo to view it full-frame at full resolution.
+(function(){
+  var photos=Array.prototype.filter.call(document.querySelectorAll('img'),function(im){
+    return /assets\//.test(im.getAttribute('src')||'') && !im.closest('header,footer');
+  });
+  if(!photos.length) return;
+  var box=document.createElement('div');
+  box.className='lightbox';
+  box.setAttribute('role','dialog');
+  box.setAttribute('aria-modal','true');
+  box.setAttribute('aria-hidden','true');
+  box.innerHTML='<button class="lb-close" type="button" aria-label="Închide">&times;</button><img alt="">';
+  document.body.appendChild(box);
+  var big=box.querySelector('img');
+  function open(src,alt){
+    big.src=src; big.alt=alt||'';
+    box.classList.add('open'); box.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    box.classList.remove('open'); box.setAttribute('aria-hidden','true');
+    document.body.style.overflow=''; big.removeAttribute('src');
+  }
+  photos.forEach(function(im){
+    im.classList.add('zoomable');
+    im.addEventListener('click',function(){ open(im.currentSrc||im.src, im.alt); });
+  });
+  box.addEventListener('click',close); // any click (backdrop, image, or ×) closes
+  window.addEventListener('keydown',function(e){
+    if(e.key==='Escape' && box.classList.contains('open')) close();
+  });
+})();
+</script>
