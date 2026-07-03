@@ -4,3 +4,5 @@ plugins:
   - jekyll-sitemap
 exclude:
   - .DS_Store
+  - CLAUDE.md
+  - README.md
