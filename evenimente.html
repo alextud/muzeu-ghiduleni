@@ -75,10 +75,12 @@
   .press .src{font-family:"Inter",sans-serif; font-size:13px; color:var(--stone); margin-top:14px;}
 
   /* poem block */
-  .poem{margin:34px 0 0; background:var(--forest-dark); color:var(--ivory); padding:48px 7vw; text-align:center;}
-  .poem h3{font-size:clamp(26px,3.4vw,36px); line-height:1.12; font-weight:700; font-style:italic; margin-bottom:30px; color:var(--ivory); text-wrap:balance;}
-  .poem .stanzas{display:flex; flex-direction:column; gap:30px; max-width:430px; margin:0 auto;}
-  .poem p{font-size:18px; line-height:1.62; font-style:italic; color:var(--parchment); text-align:left;}
+  .poem{margin:34px 0 0; background:var(--forest-dark); color:var(--ivory); padding:60px 7vw 54px; text-align:center;}
+  .poem h3{font-size:clamp(26px,3.4vw,36px); line-height:1.16; font-weight:700; font-style:italic; margin-bottom:20px; color:var(--ivory); text-wrap:balance;}
+  .poem .orn{display:flex; align-items:center; justify-content:center; gap:16px; margin:0 auto 38px; color:var(--ochre); font-size:12px;}
+  .poem .orn::before,.poem .orn::after{content:""; width:52px; height:1px; background:currentColor; opacity:.5;}
+  .poem .stanzas{display:flex; flex-direction:column; gap:36px; max-width:560px; margin:0 auto;}
+  .poem p{font-size:19px; line-height:1.9; font-style:italic; color:var(--parchment); text-align:center;}
   .poem .sig{font-family:"Inter",sans-serif; font-style:normal; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--ochre); margin-top:32px;}
 
   /* sources / links */
@@ -141,6 +143,7 @@
     <!-- POEZIE -->
     <div class="poem">
       <h3>La muzeul Croitoru<br>vin semenii cei cu Dorul</h3>
+      <div class="orn" aria-hidden="true">◆</div>
       <div class="stanzas">
         <p>La deschideri de muzee<br>N-am participat nicicând,<br>Dar în vis, leit scânteie,<br>Mă vedem colo în gând.</p>
         <p>Cel director, Croitoru,<br>Și țăran, și-nvățător,<br>Era pentru sat Izvorul,<br>Darul cunoștințelor.<br>Celor tineri dădea carte<br>Și Credință-n vremi mai bune,<br>S-avem Pâine, dar și parte<br>De Tradițiile străbune.</p>
